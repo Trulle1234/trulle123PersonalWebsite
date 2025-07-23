@@ -1,15 +1,40 @@
 :root {
-    --primary-text: #000;
+    --primary-text: #00ffff;
+    --secondary-text: #00aaaa;
+    --bg: #000000;
+}
+
+body {
+    background-color: var(--bg);
 }
 
 h1 {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
+    font-size: 3vh;
     color: var(--primary-text);
 }
 
 h3 {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: normal;
+    font-size: 1.8vh;
     color: var(--primary-text);
+}
+
+p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 1.3vh;
+  line-height: 1.5;
+  color: var(--secondary-text);
+}
+
+.main {
+    width: auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
