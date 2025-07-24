@@ -2,12 +2,16 @@
     --primary-text: #00ffff;
     --secondary-text: #06cccc;
     --bg: #000000;
-    --secondary-bg: #0f0d0f;
+    --secondary-bg: #10131A;
+    --scan: #141a1a;
 
     --chroab-strength: 1px;
     --chroab:
         calc(var(--chroab-strength) * 1)   0  0  rgba(255, 0, 255, 0.6),
         calc(var(--chroab-strength) * -1)  0  0  rgba(0, 255, 255, 0.6);
+    --chroab-dark:
+        calc(var(--chroab-strength) * 1)   0  0  rgba(128, 0, 128, 0.6),
+        calc(var(--chroab-strength) * -1)  0  0  rgba(0, 64, 64, 0.6);
 }
 
 
@@ -15,7 +19,7 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    background: var(--bg);
+    background-color: var(--bg);
     overflow: hidden;
 }
 
@@ -25,6 +29,7 @@ h1 {
     font-size: 3vh;
     color: var(--primary-text);
     text-shadow: var(--chroab);
+    z-index: 1;
 }
 
 h3 {
@@ -33,6 +38,7 @@ h3 {
     font-size: 1.8vh;
     color: var(--primary-text);
     text-shadow: var(--chroab);
+    z-index: 1;
 }
 
 p {
@@ -42,6 +48,7 @@ p {
     line-height: 1.5;
     color: var(--secondary-text);
     text-shadow: var(--chroab);
+    z-index: 1;
 }
 
 a:link {
@@ -125,13 +132,13 @@ a:active {
     height: 100%;
     width: 100%;
     top: 0;
-    z-index: -1;
+    z-index: 0;
 }
 
 .scan {
     height: 40px;
     width: 100%;
-    background-color: #141a1a;
+    background-color: var(--scan);
 }
 
 @keyframes scan {
@@ -157,6 +164,7 @@ a:active {
 .off-screen-menu {
     padding-top: 10vh;
     background-color: var(--secondary-bg);
+    box-shadow: var(--chroab-dark);
     height: 100vh;
     width: 100vh;
     max-width: 200px;
@@ -189,7 +197,7 @@ nav {
     font-size: 3vh;
     color: var(--primary-text);
     text-shadow: var(--chroab);
-    cursor: pointer;
+    cursor: pointer; 
     user-select: none;
     display: flex;
     align-items: center;
