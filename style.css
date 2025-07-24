@@ -67,7 +67,7 @@ p {
     font-weight: normal;
     font-size: 1.8vh;
     color: var(--primary-text);
-    text-shadow: var(--chroab-big);
+    text-shadow: var(--chroab-small);
 }
 
 .off-screen-menu.active {
