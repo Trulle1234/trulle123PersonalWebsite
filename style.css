@@ -2,7 +2,19 @@
     --primary-text: #00ffff;
     --secondary-text: #00aaaa;
     --bg: #000000;
+
+    --chroab-big:
+        2px   0     rgba(255, 0, 255, 0.6),
+        -2px   0     rgba(0, 255, 255, 0.6),
+        0     8px   0 rgba(0,0,0,.8),
+        8px   0     0 rgba(0,0,0,.6);
+    --chroab-small:
+        1px   0     rgba(255, 0, 255, 0.6),
+        -1px   0     rgba(0, 255, 255, 0.5),
+        0     8px   0 rgba(0,0,0,.8),
+        8px   0     0 rgba(0,0,0,.6);
 }
+
 
 body {
     background-color: var(--bg);
@@ -13,6 +25,7 @@ h1 {
     font-weight: bold;
     font-size: 3vh;
     color: var(--primary-text);
+    text-shadow: var(--chroab-big);
 }
 
 h3 {
@@ -20,14 +33,16 @@ h3 {
     font-weight: normal;
     font-size: 1.8vh;
     color: var(--primary-text);
+    text-shadow: var(--chroab-big);
 }
 
 p {
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: normal;
-  font-size: 1.3vh;
-  line-height: 1.5;
-  color: var(--secondary-text);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 1.3vh;
+    line-height: 1.5;
+    color: var(--secondary-text);
+    text-shadow: var(--chroab-small);
 }
 
 .main {
