@@ -43,6 +43,19 @@ p {
     text-shadow: var(--chroab-small);
 }
 
+a:link {
+  color: #00e6ff;
+}
+a:visited {
+    color: #00e6ff;
+}
+a:hover {
+    color: #cc00ff;
+}
+a:active {
+    color: #cc00ff;
+}
+
 .main {
     width: auto;
     height: 80vh;
@@ -68,6 +81,7 @@ p {
     font-size: 1.8vh;
     color: var(--primary-text);
     text-shadow: var(--chroab-small);
+    line-height: 2;
 }
 
 .off-screen-menu.active {
