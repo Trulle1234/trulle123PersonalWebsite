@@ -23,6 +23,6 @@ function updateChroab() {
 }
 
 window.addEventListener("resize", updateChroab);
-setInterval(updateChroab, 150);
+setInterval(updateChroab, 256);
 
 updateChroab();
