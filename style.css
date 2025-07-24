@@ -1,15 +1,13 @@
 :root {
     --primary-text: #00ffff;
-    --secondary-text: #00aaaa;
+    --secondary-text: #06cccc;
     --bg: #000000;
     --secondary-bg: #0f0d0f;
 
-    --chroab-big:
-        2px   0     rgba(255, 0, 255, 0.6),
-        -2px   0     rgba(0, 255, 255, 0.6);
-    --chroab-small:
-        1px   0     rgba(255, 0, 255, 0.6),
-        -1px   0     rgba(0, 255, 255, 0.5);
+    --chroab-strength: 1px;
+    --chroab:
+        calc(var(--chroab-strength) * 1)   0  0  rgba(255, 0, 255, 0.6),
+        calc(var(--chroab-strength) * -1)  0  0  rgba(0, 255, 255, 0.6);
 }
 
 
@@ -23,7 +21,7 @@ h1 {
     font-weight: bold;
     font-size: 3vh;
     color: var(--primary-text);
-    text-shadow: var(--chroab-big);
+    text-shadow: var(--chroab);
 }
 
 h3 {
@@ -31,16 +29,16 @@ h3 {
     font-weight: normal;
     font-size: 1.8vh;
     color: var(--primary-text);
-    text-shadow: var(--chroab-big);
+    text-shadow: var(--chroab);
 }
 
 p {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: normal;
-    font-size: 1.3vh;
+    font-size: 1.5vh;
     line-height: 1.5;
     color: var(--secondary-text);
-    text-shadow: var(--chroab-small);
+    text-shadow: var(--chroab);
 }
 
 a:link {
@@ -80,7 +78,7 @@ a:active {
     font-weight: normal;
     font-size: 1.8vh;
     color: var(--primary-text);
-    text-shadow: var(--chroab-small);
+    text-shadow: var(--chroab);
     line-height: 2;
 }
 
@@ -100,7 +98,7 @@ nav {
     margin-left: auto;
     font-size: 3vh;
     color: var(--primary-text);
-    text-shadow: var(--chroab-big);
+    text-shadow: var(--chroab);
     cursor: pointer;
     user-select: none;
     display: flex;

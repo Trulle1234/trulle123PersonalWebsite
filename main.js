@@ -10,3 +10,19 @@ document.addEventListener("DOMContentLoaded", () => {
     hamMenu.textContent = isActive ? "✕" : "☰";
   });
 });
+
+const root = document.documentElement;
+
+function updateChroab() {
+  const base = 2
+
+  const jitter   = (Math.random() * 2 - 1);
+  const strength = Math.round(Math.max(1, Math.min(8, base + jitter)));
+
+  root.style.setProperty("--chroab-strength", `${strength}px`);
+}
+
+window.addEventListener("resize", updateChroab);
+setInterval(updateChroab, 150);
+
+updateChroab();
