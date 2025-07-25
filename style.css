@@ -23,6 +23,13 @@ html, body {
     overflow: hidden;
 }
 
+canvas {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
 h1 {
     font-family: 'EB Garamond';
     font-weight: 600;
