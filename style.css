@@ -64,6 +64,18 @@ a:active {
     color: #cc00ff;
 }
 
+.images {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5vh;
+}
+
+.images img {
+    height: 20vh;
+    width: auto;
+    filter: contrast(120%);
+}
+
 .crt::before {
     content: " ";
     display: block;
