@@ -46,40 +46,55 @@ function createProgram(gl, vs, fs) {
 const fragmentShaderSrc = `
   precision mediump float;
   uniform float u_time;
+  uniform vec2 u_res;
   varying vec2 v_uv;
 
+  float rand(int i) {  // produce some "random" numbers to vary the blobs
+      return sin(float(i) * 1.64);
+  }
+
+  vec3 get_blob(int i, float time){
+      // Blob movement parameters
+      float spd = .25;
+      float move_range = .5;
+
+      float x = float(i);    
+      vec2 center = vec2(.5,.5) + .1 * vec2(rand(i),rand(i+42));    
+      center += move_range * vec2(sin(spd * time * rand(i+2)) * rand(i + 56), -sin(spd * time) * rand(i*9));
+      float radius = 0.06 * abs(rand(i+3));
+      return vec3(center.xy,radius);
+  }
+
   void main() {
-    float scale = 2.0;
-
-    float x1 = v_uv.x * 10.0 * scale;
-    float y1 = v_uv.y * 10.0 * scale;
-
-    float x2 = v_uv.x * 8.0 * scale;
-    float y2 = v_uv.y * 8.0 * scale;
-
-    float x3 = v_uv.x * 5.0 * scale;
-    float y3 = v_uv.y * 5.0 * scale;
-
-    float a = sin(u_time * 0.2);
-    float c = sin(u_time * 0.3);
-
-    float r = sin(x1 * c + u_time * 3.0)
-              + sin(y1 * a  + u_time * 2.0)
-              + cos(x3 * c * 0.5);
-
-    float g = sin(y2 * a + u_time * 2.0)
-              + sin(x2 * c + u_time * 1.0)
-              + cos(x1 * a * 0.23 + y3 * c);
-
-    float b = sin(y3 * a + u_time * 1.4)
-              + sin(x3 * c + u_time * 3.0);
-
-    r = (r + 1.0) / 2.0;
-    g = (g + 1.0) / 2.0;
-    b = (b + 1.0) / 2.0;
-
-
-    gl_FragColor = vec4(r, g, b, 1.0);
+    // Shading parameters
+    vec3 blob_color_center = vec3(0, 5, 10)/255.;
+    vec3 blob_color_edge = vec3(0, 10, 15)/255.;
+    vec3 bg_col = vec3(0, 0, 0)/255.;
+    const int num_blobs = 20;    
+    float thresh = 40000.; // determine size of balls  (larger num = smaller balls)
+    
+    vec2 uv = v_uv;   
+    float aspect = u_res.y/u_res.x;
+    uv.y *= aspect;      
+    
+    float dist_sum = 0.;
+    // use metaballs for blobs
+    for (int  i = 0; i < num_blobs; i++){      
+        vec3 blob = get_blob(i,u_time);
+        float radius = blob.z;
+        vec2 center = blob.xy;       
+        center.y *= aspect;
+        float dist_to_center = max(length(center - uv)+radius/2.,0.); // add some radius to vary blob size
+        float tmp =  (dist_to_center * dist_to_center) ;
+        dist_sum += 1. / (tmp*tmp);   
+      }
+       
+    gl_FragColor = vec4(bg_col, 0); 
+    if (dist_sum > thresh){
+        float t = smoothstep(thresh, 0., dist_sum-thresh);
+        vec3 col = mix(blob_color_center, blob_color_edge, t);
+        gl_FragColor = vec4(col, 0);
+    }   
   }
 `;
 
@@ -104,7 +119,7 @@ gl.bufferData(
 
 const positionLoc = gl.getAttribLocation(program, "a_position");
 const timeLoc = gl.getUniformLocation(program, "u_time");
-const resLoc = gl.getUniformLocation(program, "u_resolution");
+const resLoc = gl.getUniformLocation(program, "u_res");
 
 function render(time) {
   time *= 0.001;
