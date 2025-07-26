@@ -45,6 +45,7 @@ function createProgram(gl, vs, fs) {
 
 const fragmentShaderSrc = `
 precision mediump float;
+
 uniform float u_time;
 uniform vec2 u_res;
 varying vec2 v_uv;
@@ -53,18 +54,28 @@ float rand(int i) {
     return sin(float(i) * 1.64);
 }
 
+float noise(vec2 st) {
+    return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+}
+
+float grain(vec2 uv, float time) {
+    return fract(sin(dot(uv * u_res, vec2(91.345, 74.234)) + time * 20.0) * 43758.5453);
+}
+
 vec3 get_blob(int i, float time){
     float spd = .25;
     float move_range = .5;
-
-    float x = float(i);    
-    vec2 center = vec2(.5,.5) + .1 * vec2(rand(i),rand(i+42));    
-    center += move_range * vec2(sin(spd * time * rand(i+2)) * rand(i + 56), -sin(spd * time) * rand(i*9));
+    
+    vec2 center = vec2(0.5) + 0.1 * vec2(rand(i), rand(i+42));    
+    center += move_range * vec2(
+        sin(spd * time * rand(i+2)) * rand(i + 56),
+        -sin(spd * time) * rand(i*9)
+    );
+    
     float radius = 0.06 * abs(rand(i+3));
-    return vec3(center.xy,radius);
+    return vec3(center.xy, radius);
 }
 
-// Function to compute metaball strength at a given UV
 float compute_dist_sum(vec2 uv, float aspect) {
     const int num_blobs = 20;
     float dist_sum = 0.0;
@@ -83,23 +94,35 @@ float compute_dist_sum(vec2 uv, float aspect) {
 void main() {
     vec3 blob_color_center = vec3(0, 5, 10) / 255.0;
     vec3 blob_color_edge   = vec3(200, 0, 255) / 255.0;
-
     vec3 bg_col = vec3(0.0);
 
     float thresh = 40000.0;
     float aspect = u_res.y / u_res.x;
 
-    vec2 offsetR = vec2( 0.0007, -0.0007);
-    vec2 offsetG = vec2(-0.0007,  0.0007);
-    vec2 offsetB = vec2( 0.0007,  0.0007);
+    // === Pixelate ===
+  vec2 pixel_grid = vec2(640.0, 360.0);
+    vec2 pixel_uv = floor(v_uv * pixel_grid) / pixel_grid;
 
-    // Apply aspect correction to UVs
-    vec2 uv = v_uv;
+    // === Apply VHS effects AFTER pixelation ===
+
+    float wobble = sin(pixel_uv.y * 100.0 + u_time * 3.0) * 0.0006;
+
+    float glitch_band = step(0.996, fract(sin(u_time * 25.0 + pixel_uv.y * 400.0) * 43758.0)) * 0.004;
+
+    vec2 uv = pixel_uv + vec2(wobble + glitch_band, 0.0);
     uv.y *= aspect;
+
+    vec2 offsetR = vec2( 0.0005, -0.0005);
+    vec2 offsetG = vec2(-0.0005,  0.0005);
+    vec2 offsetB = vec2( 0.0005,  0.0005);
 
     float distR = compute_dist_sum(uv + offsetR, aspect);
     float distG = compute_dist_sum(uv + offsetG, aspect);
     float distB = compute_dist_sum(uv + offsetB, aspect);
+
+    float scanline = 0.96 + 0.04 * sin(v_uv.y * u_res.y * 1.5);
+    float flicker = 0.985 + 0.015 * sin(u_time * 40.0 + v_uv.y * 50.0);
+    float g = grain(v_uv, u_time) * 0.05;
 
     gl_FragColor = vec4(bg_col, 0.0); 
 
@@ -109,10 +132,13 @@ void main() {
         float tB = smoothstep(thresh, 0.0, distB - thresh);
 
         float r = mix(blob_color_center.r, blob_color_edge.r, tR);
-        float g = mix(blob_color_center.g, blob_color_edge.g, tG);
+        float g_col = mix(blob_color_center.g, blob_color_edge.g, tG);
         float b = mix(blob_color_center.b, blob_color_edge.b, tB);
 
-        gl_FragColor = vec4(r, g, b, 1.0);
+        vec3 color = vec3(r, g_col, b) * scanline * flicker;
+        color += g;
+
+        gl_FragColor = vec4(color, 1.0);
     }
 }
 `;
