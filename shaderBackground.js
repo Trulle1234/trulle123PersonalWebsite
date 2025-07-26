@@ -10,9 +10,12 @@ window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
 const vertexShaderSrc = `
-  attribute vec2 position;
+  attribute vec2 a_position;
+  varying vec2 v_uv;
+
   void main() {
-    gl_Position = vec4(position, 0.0, 1.0);
+    v_uv = a_position * 0.5 + 0.5;
+    gl_Position = vec4(a_position, 0.0, 1.0);
   }
 `;
 
@@ -41,31 +44,43 @@ function createProgram(gl, vs, fs) {
 }
 
 const fragmentShaderSrc = `
-    precision mediump float;
+  precision mediump float;
+  uniform float u_time;
+  varying vec2 v_uv;
 
-    uniform vec2 u_resolution;
-    uniform float u_time;
+  void main() {
+    float scale = 2.0;
 
-    float plot(vec2 uv, float pct) {
-        return smoothstep(pct - 0.01, pct, uv.y) - smoothstep(pct, pct + 0.01, uv.y);
-    }
+    float x1 = v_uv.x * 10.0 * scale;
+    float y1 = v_uv.y * 10.0 * scale;
 
-    void main() {
-        vec2 uv = gl_FragCoord.xy / u_resolution.xy;
-        uv = uv * 2.0 - 1.0;
-        uv.x *= u_resolution.x / u_resolution.y; // fix aspect ratio
+    float x2 = v_uv.x * 8.0 * scale;
+    float y2 = v_uv.y * 8.0 * scale;
 
-        float wave = 0.1 * sin(uv.x * 4.0 + u_time * 0.8)
-                + 0.2 * sin(uv.x * 10.0 - u_time * 1.2)
-                + 0.03 * sin(uv.x * 40.0 + u_time * 2.0);
+    float x3 = v_uv.x * 5.0 * scale;
+    float y3 = v_uv.y * 5.0 * scale;
 
-        float line = plot(uv, wave);
+    float a = sin(u_time * 0.2);
+    float c = sin(u_time * 0.3);
 
-        vec3 color = vec3(0, 0, 0);
-        color += vec3(0.0, 1, 1) * line;
+    float r = sin(x1 * c + u_time * 3.0)
+              + sin(y1 * a  + u_time * 2.0)
+              + cos(x3 * c * 0.5);
 
-        gl_FragColor = vec4(color, 1.0);
-    }
+    float g = sin(y2 * a + u_time * 2.0)
+              + sin(x2 * c + u_time * 1.0)
+              + cos(x1 * a * 0.23 + y3 * c);
+
+    float b = sin(y3 * a + u_time * 1.4)
+              + sin(x3 * c + u_time * 3.0);
+
+    r = (r + 1.0) / 2.0;
+    g = (g + 1.0) / 2.0;
+    b = (b + 1.0) / 2.0;
+
+
+    gl_FragColor = vec4(r, g, b, 1.0);
+  }
 `;
 
 const vertShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSrc);
@@ -87,7 +102,7 @@ gl.bufferData(
   gl.STATIC_DRAW
 );
 
-const positionLoc = gl.getAttribLocation(program, "position");
+const positionLoc = gl.getAttribLocation(program, "a_position");
 const timeLoc = gl.getUniformLocation(program, "u_time");
 const resLoc = gl.getUniformLocation(program, "u_resolution");
 
