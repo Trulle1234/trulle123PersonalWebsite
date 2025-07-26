@@ -44,58 +44,77 @@ function createProgram(gl, vs, fs) {
 }
 
 const fragmentShaderSrc = `
-  precision mediump float;
-  uniform float u_time;
-  uniform vec2 u_res;
-  varying vec2 v_uv;
+precision mediump float;
+uniform float u_time;
+uniform vec2 u_res;
+varying vec2 v_uv;
 
-  float rand(int i) {  // produce some "random" numbers to vary the blobs
-      return sin(float(i) * 1.64);
-  }
+float rand(int i) {
+    return sin(float(i) * 1.64);
+}
 
-  vec3 get_blob(int i, float time){
-      // Blob movement parameters
-      float spd = .25;
-      float move_range = .5;
+vec3 get_blob(int i, float time){
+    float spd = .25;
+    float move_range = .5;
 
-      float x = float(i);    
-      vec2 center = vec2(.5,.5) + .1 * vec2(rand(i),rand(i+42));    
-      center += move_range * vec2(sin(spd * time * rand(i+2)) * rand(i + 56), -sin(spd * time) * rand(i*9));
-      float radius = 0.06 * abs(rand(i+3));
-      return vec3(center.xy,radius);
-  }
+    float x = float(i);    
+    vec2 center = vec2(.5,.5) + .1 * vec2(rand(i),rand(i+42));    
+    center += move_range * vec2(sin(spd * time * rand(i+2)) * rand(i + 56), -sin(spd * time) * rand(i*9));
+    float radius = 0.06 * abs(rand(i+3));
+    return vec3(center.xy,radius);
+}
 
-  void main() {
-    // Shading parameters
-    vec3 blob_color_center = vec3(0, 5, 10)/255.;
-    vec3 blob_color_edge = vec3(0, 10, 15)/255.;
-    vec3 bg_col = vec3(0, 0, 0)/255.;
-    const int num_blobs = 20;    
-    float thresh = 40000.; // determine size of balls  (larger num = smaller balls)
-    
-    vec2 uv = v_uv;   
-    float aspect = u_res.y/u_res.x;
-    uv.y *= aspect;      
-    
-    float dist_sum = 0.;
-    // use metaballs for blobs
-    for (int  i = 0; i < num_blobs; i++){      
-        vec3 blob = get_blob(i,u_time);
+// Function to compute metaball strength at a given UV
+float compute_dist_sum(vec2 uv, float aspect) {
+    const int num_blobs = 20;
+    float dist_sum = 0.0;
+    for (int  i = 0; i < num_blobs; i++) {      
+        vec3 blob = get_blob(i, u_time);
         float radius = blob.z;
         vec2 center = blob.xy;       
         center.y *= aspect;
-        float dist_to_center = max(length(center - uv)+radius/2.,0.); // add some radius to vary blob size
-        float tmp =  (dist_to_center * dist_to_center) ;
-        dist_sum += 1. / (tmp*tmp);   
-      }
-       
-    gl_FragColor = vec4(bg_col, 0); 
-    if (dist_sum > thresh){
-        float t = smoothstep(thresh, 0., dist_sum-thresh);
-        vec3 col = mix(blob_color_center, blob_color_edge, t);
-        gl_FragColor = vec4(col, 0);
-    }   
-  }
+        float dist_to_center = max(length(center - uv) + radius / 2.0, 0.0);
+        float tmp = dist_to_center * dist_to_center;
+        dist_sum += 1.0 / (tmp * tmp);   
+    }
+    return dist_sum;
+}
+
+void main() {
+    vec3 blob_color_center = vec3(0, 5, 10) / 255.0;
+    vec3 blob_color_edge   = vec3(200, 0, 255) / 255.0;
+
+    vec3 bg_col = vec3(0.0);
+
+    float thresh = 40000.0;
+    float aspect = u_res.y / u_res.x;
+
+    vec2 offsetR = vec2( 0.0007, -0.0007);
+    vec2 offsetG = vec2(-0.0007,  0.0007);
+    vec2 offsetB = vec2( 0.0007,  0.0007);
+
+    // Apply aspect correction to UVs
+    vec2 uv = v_uv;
+    uv.y *= aspect;
+
+    float distR = compute_dist_sum(uv + offsetR, aspect);
+    float distG = compute_dist_sum(uv + offsetG, aspect);
+    float distB = compute_dist_sum(uv + offsetB, aspect);
+
+    gl_FragColor = vec4(bg_col, 0.0); 
+
+    if (distR > thresh || distG > thresh || distB > thresh) {
+        float tR = smoothstep(thresh, 0.0, distR - thresh);
+        float tG = smoothstep(thresh, 0.0, distG - thresh);
+        float tB = smoothstep(thresh, 0.0, distB - thresh);
+
+        float r = mix(blob_color_center.r, blob_color_edge.r, tR);
+        float g = mix(blob_color_center.g, blob_color_edge.g, tG);
+        float b = mix(blob_color_center.b, blob_color_edge.b, tB);
+
+        gl_FragColor = vec4(r, g, b, 1.0);
+    }
+}
 `;
 
 const vertShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSrc);

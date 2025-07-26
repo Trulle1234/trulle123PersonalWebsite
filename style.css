@@ -28,6 +28,7 @@ canvas {
     position: fixed;
     top: 0;
     left: 0;
+    filter: blur(10px);
 }
 
 h1 {
@@ -144,32 +145,6 @@ a:active {
     pointer-events: none;
     animation: flicker 0.15s infinite;
 }
-
-.scan-bar {
-    animation: scan 3s linear infinite;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    z-index: 0;
-}
-
-.scan {
-    height: 40px;
-    width: 100%;
-    background-color: var(--scan);
-}
-
-@keyframes scan {
-    0% { 
-        transform: translateY(0%); 
-    }
-    100% { 
-        transform: translateY(100%);
-        opacity: 0;
-    }
-}
-
 
 .main {
     width: auto;
