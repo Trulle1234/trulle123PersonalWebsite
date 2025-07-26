@@ -121,8 +121,11 @@ const positionLoc = gl.getAttribLocation(program, "a_position");
 const timeLoc = gl.getUniformLocation(program, "u_time");
 const resLoc = gl.getUniformLocation(program, "u_res");
 
+const timeOffset = Math.random() * 3600;
+
 function render(time) {
-  time *= 0.001;
+  time = time * 0.001 + timeOffset;
+
   gl.viewport(0, 0, canvas.width, canvas.height);
   gl.clear(gl.COLOR_BUFFER_BIT);
 
