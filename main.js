@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     filey.src="filey/dithered/filey_blink.png"
     setTimeout(() => {
       filey.src = "filey/dithered/filey_idle.png";
-    }, 150);
+    }, 200);
   }
 
   function scheduleRandomBlink() {
