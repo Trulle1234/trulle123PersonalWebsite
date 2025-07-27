@@ -99,8 +99,10 @@ void main() {
     float thresh = 40000.0;
     float aspect = u_res.y / u_res.x;
 
+    const float pixel_width = 256.0;
+
     // === Pixelate ===
-  vec2 pixel_grid = vec2(640.0, 360.0);
+    vec2 pixel_grid = vec2(pixel_width, pixel_width * aspect);
     vec2 pixel_uv = floor(v_uv * pixel_grid) / pixel_grid;
 
     // === Apply VHS effects AFTER pixelation ===
