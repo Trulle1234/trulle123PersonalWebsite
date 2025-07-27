@@ -157,7 +157,7 @@ a:active {
 
 .filey {
     position: fixed;
-    left: 100px;
+    left: calc(100vw - 120px);
     top: calc(100vh - 100px);
     transform: translate(-50%, -50%);
 }
@@ -171,7 +171,7 @@ a:active {
     max-width: 200px;
     position: fixed;
     top: 0;
-    right: -450px;
+    left: -450px;
     transition: 0.3s ease;
 
     font-family: 'EB Garamond';
@@ -183,7 +183,7 @@ a:active {
 }
 
 .off-screen-menu.active {
-    right: 0;
+    left: 0;
 }
 
 nav {
@@ -195,7 +195,7 @@ nav {
 .ham-menu {
     font-family: 'EB Garamond';
     z-index: 99;
-    margin-left: auto;
+    margin-right: auto;
     font-size: 3vh;
     color: var(--primary-text);
     text-shadow: var(--chroab);
