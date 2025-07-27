@@ -9,6 +9,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     hamMenu.textContent = isActive ? "✕" : "☰";
   });
+
+  
+  filey = document.getElementById("filey")
+
+  function fileyBlink() {
+    filey.src="filey/dithered/filey_blink.png"
+    setTimeout(() => {
+      filey.src = "filey/dithered/filey_idle.png";
+    }, 150);
+  }
+
+  function scheduleRandomBlink() {
+    const delay = 2000 + Math.random() * 3000;
+    setTimeout(() => {
+      fileyBlink();
+      scheduleRandomBlink();
+    }, delay);
+  }
+
+  scheduleRandomBlink();
 });
 
 const root = document.documentElement;
