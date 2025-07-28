@@ -160,6 +160,39 @@ a:active {
     left: calc(100vw - 120px);
     top: calc(100vh - 100px);
     transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: 0.3s ease-out;
+}
+
+.filey.talking {
+    top: calc(100vh - 170px);
+}
+
+.filey-dialog {
+    font-family: 'EB Garamond';
+    font-weight: 400;
+    font-size: 1.5vh;
+    line-height: 1.5;
+    color: var(--secondary-text);
+    text-shadow: var(--chroab);
+    z-index: 1;
+    text-align: center;
+
+    position: fixed;
+    bottom: -200px;
+    right: 20px;
+
+    width: 200px;
+    height: 100px;
+    background-color: var(--secondary-bg);
+    outline: 3px ridge var(--secondary-text);
+
+    transition: 0.3s ease;
+}
+
+.filey-dialog.active {
+    bottom: 20px;
+
 }
 
 .off-screen-menu {

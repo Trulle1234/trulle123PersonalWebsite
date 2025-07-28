@@ -11,7 +11,15 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   
-  filey = document.getElementById("filey")
+  const filey = document.getElementById("filey")
+  const fileyWrapper = document.querySelector(".filey");
+
+  fileyWrapper.addEventListener("click", function () {
+      const dialog = document.querySelector(".filey-dialog");
+      dialog.classList.toggle("active");
+      fileyWrapper.classList.toggle("talking");
+  });
+
 
   function fileyBlink() {
     filey.src="filey/dithered/filey_blink.png"
