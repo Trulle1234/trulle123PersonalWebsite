@@ -5,9 +5,6 @@ const foldyLines = new Map([
     [["sleep", "late"], ["Okay I'll sleep! 1 sheep, 2 sheep, 3 sheep, 4 sheep, 5 sheep, 6 sh....", "foldy/dithered/sleeping.png"]]
 ]);
 
-let canBlink = true;
-let waitingForNext = false;
-
 document.addEventListener("DOMContentLoaded", () => {
     const foldy = document.getElementById("foldy");
     const foldyWrapper = document.querySelector(".foldy");
@@ -21,8 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
         foldyReply.innerHTML = "";
 
         if (!dialog.classList.contains("active")) {
-            canBlink = true;
-            waitingForNext = false;
+            foldy.src = "foldy/dithered/idle.png";
         }
     });
 
@@ -34,15 +30,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 foldyReply.innerHTML = reply.text;
                 foldy.src = reply.image;
                 foldyInput.value = "";
-
-                canBlink = false;
-                waitingForNext = true;
             }
         }
     });
     
     function foldyBlink() {
-        if (!canBlink) return;
         if (!foldy.src.endsWith("idle.png")) return;
 
         foldy.src = "foldy/dithered/blink.png";
