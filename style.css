@@ -173,7 +173,7 @@ a:active {
     font-weight: 400;
     font-size: 1.5vh;
     line-height: 1.5;
-    color: var(--secondary-text);
+    color: var(--primary-text);
     text-shadow: var(--chroab);
     z-index: 1;
     text-align: center;
@@ -210,6 +210,11 @@ a:active {
 
 .foldy-dialog input:focus {
     outline: none;
+}
+
+.foldy-dialog input::placeholder {
+    color: var(--secondary-text);
+    font-style: italic;
 }
 
 .off-screen-menu {
