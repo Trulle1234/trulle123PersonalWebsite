@@ -155,7 +155,7 @@ a:active {
     align-items: center;
 }
 
-.filey {
+.foldy {
     position: fixed;
     left: calc(100vw - 120px);
     top: calc(100vh - 100px);
@@ -164,11 +164,11 @@ a:active {
     transition: 0.3s ease-out;
 }
 
-.filey.talking {
+.foldy.talking {
     top: calc(100vh - 170px);
 }
 
-.filey-dialog {
+.foldy-dialog {
     font-family: 'EB Garamond';
     font-weight: 400;
     font-size: 1.5vh;
@@ -190,9 +190,26 @@ a:active {
     transition: 0.3s ease;
 }
 
-.filey-dialog.active {
+.foldy-dialog.active {
     bottom: 20px;
 
+}
+
+.foldy-dialog input {
+    background-color: var(--bg);
+    border: none;
+
+    font-family: 'EB Garamond';
+    font-weight: 400;
+    font-size: 1.3vh;
+    line-height: 1.5;
+    color: var(--secondary-text);
+    text-shadow: var(--chroab);
+    z-index: 1;
+}
+
+.foldy-dialog input:focus {
+    outline: none;
 }
 
 .off-screen-menu {

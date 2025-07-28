@@ -9,34 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     hamMenu.textContent = isActive ? "✕" : "☰";
   });
-
-  
-  const filey = document.getElementById("filey")
-  const fileyWrapper = document.querySelector(".filey");
-
-  fileyWrapper.addEventListener("click", function () {
-      const dialog = document.querySelector(".filey-dialog");
-      dialog.classList.toggle("active");
-      fileyWrapper.classList.toggle("talking");
-  });
-
-
-  function fileyBlink() {
-    filey.src="filey/dithered/filey_blink.png"
-    setTimeout(() => {
-      filey.src = "filey/dithered/filey_idle.png";
-    }, 200);
-  }
-
-  function scheduleRandomBlink() {
-    const delay = 2000 + Math.random() * 3000;
-    setTimeout(() => {
-      fileyBlink();
-      scheduleRandomBlink();
-    }, delay);
-  }
-
-  scheduleRandomBlink();
 });
 
 const root = document.documentElement;
