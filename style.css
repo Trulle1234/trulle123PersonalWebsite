@@ -146,13 +146,21 @@ a:active {
     animation: flicker 0.15s infinite;
 }
 
+.center-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    height: calc(100vh - 150px);
+}
+
 .main {
-    width: auto;
+    width: 48vw;
     height: 80vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    text-align: center;
 }
 
 .foldy {
