@@ -1,13 +1,14 @@
 const foldyLines = new Map([
     [["what do you think", "opinion"], ["My opinion? I was not programmed for that responsibility.", "foldy/dithered/thinking.png"]],
     [["who are you", "what are you", "do you do"], ["I am Foldy, your helper for Trulle123's website.", "foldy/dithered/idle.png"]],
-    [["artificial intelligence", "ai"], ["No, No I am no AI, I am an AS (Artificial Stupidity).", "foldy/dithered/judgemental.png"]],
+    [["artificial intelligence", "ai"], ["No, No I am no AI, I am an AS (Artificial Stupidity).", "foldy/dithered/judgmental.png"]],
     [["crash", "error", "uh oh"], ["Abort! Retry! Panic!!", "foldy/dithered/stressed.png"]],
     [["stop it", "shut up"], ["WELL EXCUSE ME FOR TRYING TO HELP!!", "foldy/dithered/angry.png"]],
     [["wrong", "is not", "s not", "stop"],["AND, I DID NOT UNDERSTAND CORRECTLY!! YOU DON'T HAVE TO GET ANGRY!!!! BLAME TRULLE, HE MADE ME!", "foldy/dithered/angry.png"]],
+    [["what can you do", "can you even do", "you do", "do nothing", "do anything"], ["What can i do, Just check the github...           github.com/Trulle1234/            trulle123PersonalWebsite", "foldy/dithered/judgmental.png"]],
     [["bug", "this sucks"], ["Take it up with Trulle. I'm just the messenger!", "foldy/dithered/angry.png"]],
     [["stupid", "bad"], ["Awww that's not nice, Foldy sad now", "foldy/dithered/sad.png"]],
-    [["serious", "really"], ["I'm judging you silently. Very silently.", "foldy/dithered/judgemental.png"]],
+    [["serious", "really"], ["I'm judging you silently. Very silently.", "foldy/dithered/judgmental.png"]],
     [["bored", "nothing to do"], ["Try clicking around, or go to the Gallery and get inspired!", "foldy/dithered/thinking.png"]],
     [["sleep", "late"], ["Okay I'll sleep! 1 sheep, 2 sheep, 3 sheep, 4 sheep, 5 sheep, 6 sh....", "foldy/dithered/sleeping.png"]],
     [["hi", "hello"], ["Hello! How can I help you?", "foldy/dithered/idle.png"]],
@@ -32,7 +33,27 @@ const foldyImgLines = new Map([
     [["mill"], ["Also at Krka, this is one of the buildings in the water mill area.", "foldy/dithered/idle.png"]],
 ]);
 
+function preloadFoldyImages() {
+    const imageSet = new Set();
+
+    for (const [, value] of foldyLines) {
+        imageSet.add(value[1]);
+    }
+
+    for (const [, value] of foldyImgLines) {
+        imageSet.add(value[1]);
+    }
+
+    imageSet.add("foldy/dithered/blink.png");
+
+    for (const src of imageSet) {
+        const img = new Image();
+        img.src = src;
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+    preloadFoldyImages();
     const foldy = document.getElementById("foldy");
     const foldyWrapper = document.querySelector(".foldy");
     const foldyInput = document.getElementById("foldy-input");
