@@ -74,15 +74,22 @@ a:active {
 
 .images {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 5vh;
+    max-width: 1200px; 
+    margin: 0 auto;
+    justify-content: center;
+    text-align: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
 }
 
 .images img {
     height: 20vh;
     width: auto;
-    filter: contrast(120%);
 }
+
 
 .crt::before {
     content: " ";
@@ -161,6 +168,30 @@ a:active {
     flex-direction: column;
     justify-content: center;
     text-align: center;
+
+    font-family: 'EB Garamond';
+    font-weight: 400;
+    font-size: 1.5vh;
+    line-height: 1.5;
+    color: var(--secondary-text);
+    text-shadow: var(--chroab);
+    z-index: 1;
+}
+
+.contact {
+    width: 48vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    font-family: 'EB Garamond';
+    font-weight: 500;
+    font-size: 1.8vh;
+    color: var(--primary-text);
+    text-shadow: var(--chroab);
+    z-index: 1;
 }
 
 .foldy {
