@@ -1,13 +1,28 @@
 const foldyLines = new Map([
-    [["flowers"], ["That is one of Trulles first good photos, the cool background was accidental when messing with editing.", "foldy/dithered/idle.png"]],
-    [["factory"], ["This one is taken at a beach in Sweden. The somke is added in post. If you look very closly you can see a girl looking up at the dystopian sight.", "foldy/dithered/idle.png", "foldy/dithered/idle.png"]],
-    [["laser"], ["The photo is taken in front of a concreate wall and the girl is holding Trulles light saber.", "foldy/dithered/idle.png", "foldy/dithered/idle.png"]],
-    [["cows"], ["This photo is quite special as it is taken on \"Alvaret\" in Öland. Which is a national park. Trulle submited this to \"Wiki Loves Earth 2024\".", "foldy/dithered/idle.png", "foldy/dithered/idle.png"]],
     [["hi", "hello"], ["Hello! How can I help you?", "foldy/dithered/idle.png"]],
     [["who are you", "what are you", "do you do"], ["I am Foldy, your helper for Trulle123's website.", "foldy/dithered/idle.png"]],
     [["ai", "artificial intelligence"], ["No, No I am no AI, I am an AS (Artificial Stupidity).", "foldy/dithered/jugemental.png"]],
     [["sleep", "late"], ["Okay I'll sleep! 1 sheep, 2 sheep, 3 sheep, 4 sheep, 5 sheep, 6 sh....", "foldy/dithered/sleeping.png"]],
-    [["wrong", "is not", "s not", "stop"],["AND, I DID NOT UNDERSTAND CORRECTLY!! YOU DON'T HAVE TO GET ANGRY!!!! BLAME TRULLE, HE MADE ME!", "foldy/dithered/angry.png"]]
+    [["wrong", "is not", "s not", "stop"],["AND, I DID NOT UNDERSTAND CORRECTLY!! YOU DON'T HAVE TO GET ANGRY!!!! BLAME TRULLE, HE MADE ME!", "foldy/dithered/angry.png"]],
+]);
+
+const foldyImgLines = new Map([
+    [["flowers"], ["That is one of Trulles first good photos, the cool background was accidental when messing with editing.", "foldy/dithered/idle.png"]],
+    [["factory"], ["This one is taken at a beach in Sweden. The somke is added in post. If you look very closly you can see a girl looking up at the dystopian sight.", "foldy/dithered/idle.png"]],
+    [["laser"], ["The photo is taken in front of a concreate wall and the girl is holding Trulles light saber.", "foldy/dithered/idle.png", "foldy/dithered/idle.png"]],
+    [["cows"], ["This photo is quite special as it is taken at \"Alvaret\" on Öland. Which is a national park. Trulle submited this to \"Wiki Loves Earth 2024\".", "foldy/dithered/idle.png"]],
+    [["sun_and_grass"], ["This image is also from Öland. It is captured at sundown at a rest area beside an old windmill.", "foldy/dithered/idle.png"]],
+    [["field"], ["The image shows a field outside of Kalmar. Fun fact, this is the cover image for a wikipedia article, can you find it without image serch?", "foldy/dithered/idle.png"]],
+    [["pier"], ["That one is taken on Gotland and it shows a litte old swimming pier.", "foldy/dithered/idle.png", "foldy/dithered/idle.png"]],
+    [["vespa"], ["Also from Gotland, a vespa outside of an italian resturant called \"Mille Lire\" which means \"A thousand Lire\" (lire was there currency before the euro).", "foldy/dithered/idle.png"]],
+    [["trash_rabbit"], ["This photo is very intersting, you see when Trulle was waliking around he found this. A bag somone threw away that looked a lot like a litte bunny.", "foldy/dithered/idle.png"]],
+    [["fire_sign"], ["The photo here is taken at a restaurant in Copenhagen called Wok On and it shows there logo.", "foldy/dithered/idle.png"]],
+    [["street_lamp"], ["This photo speeks for it self, its a street lamp on a fogy night. Nothing more to say!", "foldy/dithered/idle.png"]],
+    [["sun_down_on_mountain"], ["This is taken on Idre Fjäll right as the sun goes dow below the mountains.", "foldy/dithered/idle.png"]],
+    [["pizza"], ["Captured at Ernesto Ristorante in Kalmar the photo shows a spicy pizza caled \"Diavola\". The camera shown is the one used for the two last photos.", "foldy/dithered/idle.png"]],
+    [["primosten_at_night"], ["This photo is taken right by the statue on the mountain overlooking Primosten.", "foldy/dithered/idle.png"]],
+    [["waterfall"], ["Here you see the biggest of the waterfalls at Krka National Park in Croatia. Trulle told me it was very beautiful IRL there.", "foldy/dithered/idle.png"]],
+    [["mill"], ["Also at Krka this is one of the houses in the water mill.", "foldy/dithered/idle.png"]],
 ]);
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -63,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     images.forEach(img => {
         img.addEventListener("click", function () {
             const altText = this.alt;
-            const reply = getFoldyReply(altText);
+            const reply = getFoldyImgReply(altText);
 
             const dialog = document.querySelector(".foldy-dialog");
             dialog.classList.add("active");
@@ -93,4 +108,18 @@ function getFoldyReply(input) {
         text: "I don't understad that yet. Do you need help with somthing else?",
         image: "foldy/dithered/thinking.png"
     };
+}
+
+
+function getFoldyImgReply(input) {
+    for (const [keys, value] of foldyImgLines) {
+        for (const key of keys) {
+            if (input === key) {
+                return {
+                    text: value[0],
+                    image: value[1]
+                };
+            }
+        }
+    }
 }
