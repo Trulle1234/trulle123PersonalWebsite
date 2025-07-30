@@ -1,15 +1,22 @@
 const foldyLines = new Map([
-    [["hi", "hello"], ["Hello! How can I help you?", "foldy/dithered/idle.png"]],
+    [["what do you think", "opinion"], ["My opinion? I was not programmed for that responsibility.", "foldy/dithered/thinking.png"]],
     [["who are you", "what are you", "do you do"], ["I am Foldy, your helper for Trulle123's website.", "foldy/dithered/idle.png"]],
-    [["ai", "artificial intelligence"], ["No, No I am no AI, I am an AS (Artificial Stupidity).", "foldy/dithered/jugemental.png"]],
-    [["sleep", "late"], ["Okay I'll sleep! 1 sheep, 2 sheep, 3 sheep, 4 sheep, 5 sheep, 6 sh....", "foldy/dithered/sleeping.png"]],
+    [["artificial intelligence", "ai"], ["No, No I am no AI, I am an AS (Artificial Stupidity).", "foldy/dithered/judgemental.png"]],
+    [["crash", "error", "uh oh"], ["Abort! Retry! Panic!!", "foldy/dithered/stressed.png"]],
+    [["stop it", "shut up"], ["WELL EXCUSE ME FOR TRYING TO HELP!!", "foldy/dithered/angry.png"]],
     [["wrong", "is not", "s not", "stop"],["AND, I DID NOT UNDERSTAND CORRECTLY!! YOU DON'T HAVE TO GET ANGRY!!!! BLAME TRULLE, HE MADE ME!", "foldy/dithered/angry.png"]],
+    [["bug", "this sucks"], ["Take it up with Trulle. I'm just the messenger!", "foldy/dithered/angry.png"]],
+    [["stupid", "bad"], ["Awww that's not nice, Foldy sad now", "foldy/dithered/sad.png"]],
+    [["serious", "really"], ["I'm judging you silently. Very silently.", "foldy/dithered/judgemental.png"]],
+    [["bored", "nothing to do"], ["Try clicking around, or go to the Gallery and get inspired!", "foldy/dithered/thinking.png"]],
+    [["sleep", "late"], ["Okay I'll sleep! 1 sheep, 2 sheep, 3 sheep, 4 sheep, 5 sheep, 6 sh....", "foldy/dithered/sleeping.png"]],
+    [["hi", "hello"], ["Hello! How can I help you?", "foldy/dithered/idle.png"]],
 ]);
 
 const foldyImgLines = new Map([
     [["flowers"], ["That is one of Trulles first good photos, the cool background was accidental when messing with editing.", "foldy/dithered/idle.png"]],
     [["factory"], ["This one is taken at a beach in Sweden. The somke is added in post. If you look very closly you can see a girl looking up at the dystopian sight.", "foldy/dithered/idle.png"]],
-    [["laser"], ["The photo is taken in front of a concreate wall and the girl is holding Trulles light saber.", "foldy/dithered/idle.png", "foldy/dithered/idle.png"]],
+    [["laser"], ["The photo is taken in front of a concreate wall and the girl is holding Trulles light saber.", "foldy/dithered/idle.png"]],
     [["cows"], ["This photo is quite special as it is taken at \"Alvaret\" on Öland. Which is a national park. Trulle submited this to \"Wiki Loves Earth 2024\".", "foldy/dithered/idle.png"]],
     [["sun_and_grass"], ["This image is also from Öland. It is captured at sundown at a rest area beside an old windmill.", "foldy/dithered/idle.png"]],
     [["field"], ["The image shows a field outside of Kalmar. Fun fact, this is the cover image for a wikipedia article, can you find it without image serch?", "foldy/dithered/idle.png"]],
