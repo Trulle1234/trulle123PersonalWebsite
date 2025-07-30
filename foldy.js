@@ -14,22 +14,22 @@ const foldyLines = new Map([
 ]);
 
 const foldyImgLines = new Map([
-    [["flowers"], ["That is one of Trulles first good photos, the cool background was accidental when messing with editing.", "foldy/dithered/idle.png"]],
-    [["factory"], ["This one is taken at a beach in Sweden. The somke is added in post. If you look very closly you can see a girl looking up at the dystopian sight.", "foldy/dithered/idle.png"]],
-    [["laser"], ["The photo is taken in front of a concreate wall and the girl is holding Trulles light saber.", "foldy/dithered/idle.png"]],
-    [["cows"], ["This photo is quite special as it is taken at \"Alvaret\" on Öland. Which is a national park. Trulle submited this to \"Wiki Loves Earth 2024\".", "foldy/dithered/idle.png"]],
-    [["sun_and_grass"], ["This image is also from Öland. It is captured at sundown at a rest area beside an old windmill.", "foldy/dithered/idle.png"]],
-    [["field"], ["The image shows a field outside of Kalmar. Fun fact, this is the cover image for a wikipedia article, can you find it without image serch?", "foldy/dithered/idle.png"]],
-    [["pier"], ["That one is taken on Gotland and it shows a litte old swimming pier.", "foldy/dithered/idle.png", "foldy/dithered/idle.png"]],
-    [["vespa"], ["Also from Gotland, a vespa outside of an italian resturant called \"Mille Lire\" which means \"A thousand Lire\" (lire was there currency before the euro).", "foldy/dithered/idle.png"]],
-    [["trash_rabbit"], ["This photo is very intersting, you see when Trulle was waliking around he found this. A bag somone threw away that looked a lot like a litte bunny.", "foldy/dithered/idle.png"]],
-    [["fire_sign"], ["The photo here is taken at a restaurant in Copenhagen called Wok On and it shows there logo.", "foldy/dithered/idle.png"]],
-    [["street_lamp"], ["This photo speeks for it self, its a street lamp on a fogy night. Nothing more to say!", "foldy/dithered/idle.png"]],
-    [["sun_down_on_mountain"], ["This is taken on Idre Fjäll right as the sun goes dow below the mountains.", "foldy/dithered/idle.png"]],
-    [["pizza"], ["Captured at Ernesto Ristorante in Kalmar the photo shows a spicy pizza caled \"Diavola\". The camera shown is the one used for the two last photos.", "foldy/dithered/idle.png"]],
-    [["primosten_at_night"], ["This photo is taken right by the statue on the mountain overlooking Primosten.", "foldy/dithered/idle.png"]],
-    [["waterfall"], ["Here you see the biggest of the waterfalls at Krka National Park in Croatia. Trulle told me it was very beautiful IRL there.", "foldy/dithered/idle.png"]],
-    [["mill"], ["Also at Krka this is one of the houses in the water mill.", "foldy/dithered/idle.png"]],
+    [["flowers"], ["That is one of Trulle’s first good photos. The cool background was actually an accident while experimenting with editing.", "foldy/dithered/idle.png"]],
+    [["factory"], ["This one was taken at a beach in Sweden. The smoke was added in post. If you look very closely, you can see a girl looking up at the dystopian sight.", "foldy/dithered/idle.png"]],
+    [["laser"], ["This photo was taken in front of a concrete wall. The girl is holding Trulle’s lightsaber.", "foldy/dithered/idle.png"]],
+    [["cows"], ["This photo is quite special — it's taken at 'Alvaret' on Öland, which is a national park. Trulle submitted this to 'Wiki Loves Earth 2024'.", "foldy/dithered/idle.png"]],
+    [["sun_and_grass"], ["Also from Öland. This was captured at sundown at a rest area beside an old windmill.", "foldy/dithered/idle.png"]],
+    [["field"], ["This photo shows a field outside of Kalmar. Fun fact: it’s the cover image for a Wikipedia article — can you find it without image search?", "foldy/dithered/idle.png"]],
+    [["pier"], ["Taken on Gotland, this shows a little old swimming pier.", "foldy/dithered/idle.png"]],
+    [["vespa"], ["Also from Gotland — a Vespa parked outside an Italian restaurant called 'Mille Lire', which means 'A Thousand Lire' (Italy’s old currency).", "foldy/dithered/idle.png"]],
+    [["trash_rabbit"], ["This photo is very interesting — while walking around, Trulle found this: a discarded bag that looks a lot like a little bunny.", "foldy/dithered/idle.png"]],
+    [["fire_sign"], ["This was taken at a restaurant in Copenhagen called Wok On, and it shows their logo.", "foldy/dithered/idle.png"]],
+    [["street_lamp"], ["This photo speaks for itself — it’s a street lamp on a foggy night. Nothing more to say!", "foldy/dithered/idle.png"]],
+    [["sun_down_on_mountain"], ["Taken at Idre Fjäll, right as the sun dipped below the mountains.", "foldy/dithered/idle.png"]],
+    [["pizza"], ["Captured at Ernesto Ristorante in Kalmar, this shows a spicy pizza called 'Diavola'. The camera shown is the same one used for the last two photos.", "foldy/dithered/idle.png"]],
+    [["primosten_at_night"], ["Taken by the statue on the mountain overlooking Primošten at night.", "foldy/dithered/idle.png"]],
+    [["waterfall"], ["This is the largest waterfall at Krka National Park in Croatia. Trulle told me it was breathtaking in real life!", "foldy/dithered/idle.png"]],
+    [["mill"], ["Also at Krka, this is one of the buildings in the water mill area.", "foldy/dithered/idle.png"]],
 ]);
 
 document.addEventListener("DOMContentLoaded", () => {
