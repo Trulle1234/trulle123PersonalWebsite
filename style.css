@@ -88,6 +88,13 @@ a:active {
 .images img {
     height: 20vh;
     width: auto;
+    cursor: pointer;
+}
+
+.images h6 {
+    height: 20vh;
+    width: auto;
+    cursor: pointer;
 }
 
 

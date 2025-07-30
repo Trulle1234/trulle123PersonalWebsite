@@ -1,4 +1,8 @@
 const foldyLines = new Map([
+    [["flowers"], ["That is one of Trulles first good photos, the cool background was accidental when messing with editing.", "foldy/dithered/idle.png"]],
+    [["factory"], ["This one is taken at a beach in Sweden. The somke is added in post. If you look very closly you can see a girl looking up at the dystopian sight.", "foldy/dithered/idle.png", "foldy/dithered/idle.png"]],
+    [["laser"], ["The photo is taken in front of a concreate wall and the girl is holding Trulles light saber.", "foldy/dithered/idle.png", "foldy/dithered/idle.png"]],
+    [["cows"], ["This photo is quite special as it is taken on \"Alvaret\" in Öland. Which is a national park. Trulle submited this to \"Wiki Loves Earth 2024\".", "foldy/dithered/idle.png", "foldy/dithered/idle.png"]],
     [["hi", "hello"], ["Hello! How can I help you?", "foldy/dithered/idle.png"]],
     [["who are you", "what are you", "do you do"], ["I am Foldy, your helper for Trulle123's website.", "foldy/dithered/idle.png"]],
     [["ai", "artificial intelligence"], ["No, No I am no AI, I am an AS (Artificial Stupidity).", "foldy/dithered/jugemental.png"]],
@@ -53,6 +57,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     scheduleRandomBlink();
+
+    const images = document.querySelectorAll(".images img");
+
+    images.forEach(img => {
+        img.addEventListener("click", function () {
+            const altText = this.alt;
+            const reply = getFoldyReply(altText);
+
+            const dialog = document.querySelector(".foldy-dialog");
+            dialog.classList.add("active");
+            foldyWrapper.classList.add("talking");
+
+            foldyReply.innerHTML = reply.text;
+            foldy.src = reply.image;
+
+            foldyInput.value = "";
+        });
+    });
 });
 
 function getFoldyReply(input) {
