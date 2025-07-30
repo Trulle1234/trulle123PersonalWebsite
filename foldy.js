@@ -2,7 +2,8 @@ const foldyLines = new Map([
     [["hi", "hello"], ["Hello! How can I help you?", "foldy/dithered/idle.png"]],
     [["who are you", "what are you", "do you do"], ["I am Foldy, your helper for Trulle123's website.", "foldy/dithered/idle.png"]],
     [["ai", "artificial intelligence"], ["No, No I am no AI, I am an AS (Artificial Stupidity).", "foldy/dithered/jugemental.png"]],
-    [["sleep", "late"], ["Okay I'll sleep! 1 sheep, 2 sheep, 3 sheep, 4 sheep, 5 sheep, 6 sh....", "foldy/dithered/sleeping.png"]]
+    [["sleep", "late"], ["Okay I'll sleep! 1 sheep, 2 sheep, 3 sheep, 4 sheep, 5 sheep, 6 sh....", "foldy/dithered/sleeping.png"]],
+    [["wrong", "is not", "s not", "stop"],["AND, I DID NOT UNDERSTAND CORRECTLY!! YOU DON'T HAVE TO GET ANGRY!!!! BLAME TRULLE, HE MADE ME!", "foldy/dithered/angry.png"]]
 ]);
 
 document.addEventListener("DOMContentLoaded", () => {
